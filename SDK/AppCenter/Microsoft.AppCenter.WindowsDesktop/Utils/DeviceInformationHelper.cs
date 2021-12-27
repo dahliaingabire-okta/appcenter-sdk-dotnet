@@ -183,8 +183,7 @@ namespace Microsoft.AppCenter.Utils
              * the version number specified by the AssemblyFileVersion attribute is used instead.
              */
 #if WINDOWS10_0_17763_0
-            var packageVersion = Package.Current.Id.Version;
-            return $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}.{packageVersion.Revision}";
+            return $"1";
 #else
             return DeploymentVersion ?? Application.ProductVersion;
 #endif
@@ -193,8 +192,7 @@ namespace Microsoft.AppCenter.Utils
         protected override string GetAppBuild()
         {
 #if WINDOWS10_0_17763_0
-            var packageVersion = Package.Current.Id.Version;
-            return $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}.{packageVersion.Revision}";
+            return $"1";
 #else
             return DeploymentVersion ?? FileVersion;
 #endif

@@ -1,15 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-#if WINDOWS10_0_17763_0
 using System;
 using System.Runtime.ExceptionServices;
+#if WINDOWS10_0_17763_0
 using Windows.ApplicationModel.Core;
 using Windows.Foundation.Metadata;
+#endif
 
 namespace Microsoft.AppCenter.Utils
 {
-    public class ApplicationLifecycleHelper : IApplicationLifecycleHelper
+    public class ApplicationLifecycleHelperWinUI: IApplicationLifecycleHelper
     {
         public event EventHandler ApplicationSuspended;
         public event EventHandler ApplicationResuming;
@@ -19,10 +20,10 @@ namespace Microsoft.AppCenter.Utils
         private static bool _suspended = true;
 
         // Singleton instance of ApplicationLifecycleHelper
-        private static ApplicationLifecycleHelper _instance;
-        public static ApplicationLifecycleHelper Instance
+        private static ApplicationLifecycleHelperWinUI _instance;
+        public static ApplicationLifecycleHelperWinUI Instance
         {
-            get { return _instance ?? (_instance = new ApplicationLifecycleHelper()); }
+            get { return _instance ?? (_instance = new ApplicationLifecycleHelperWinUI()); }
 
             // Setter for testing
             internal set { _instance = value; }
@@ -33,9 +34,10 @@ namespace Microsoft.AppCenter.Utils
         /// </summary>
         public bool IsSuspended => _suspended;
 
-        public ApplicationLifecycleHelper()
+        public ApplicationLifecycleHelperWinUI()
         {
 
+#if WINDOWS10_0_17763_0
             // If the "LeavingBackground" event is present, use that for Resuming. Else, use CoreApplication.Resuming.
             if (ApiInformation.IsEventPresent(typeof(CoreApplication).FullName, "LeavingBackground"))
             {
@@ -67,6 +69,7 @@ namespace Microsoft.AppCenter.Utils
                     ExceptionDispatchInfo.Capture(exception).Throw();
                 }
             };
+#endif
         }
 
         internal void InvokeUnhandledExceptionOccurred(object sender, Exception exception)
@@ -81,4 +84,3 @@ namespace Microsoft.AppCenter.Utils
         }
     }
 }
-#endif

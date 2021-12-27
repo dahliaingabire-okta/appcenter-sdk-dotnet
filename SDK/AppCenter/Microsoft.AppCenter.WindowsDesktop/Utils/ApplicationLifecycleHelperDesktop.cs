@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-#if !WINDOWS10_0_17763_0
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -12,13 +11,13 @@ using System.Windows.Forms;
 
 namespace Microsoft.AppCenter.Utils
 {
-    public class ApplicationLifecycleHelper : IApplicationLifecycleHelper
+    public class ApplicationLifecycleHelperDesktop : IApplicationLifecycleHelper
     {
         // Singleton instance of ApplicationLifecycleHelper
         private static IApplicationLifecycleHelper _instance;
         public static IApplicationLifecycleHelper Instance
         {
-            get { return _instance ?? (_instance = new ApplicationLifecycleHelper()); }
+            get { return _instance ?? (_instance = new ApplicationLifecycleHelperDesktop()); }
 
             // Setter for testing
             internal set { _instance = value; }
@@ -74,7 +73,7 @@ namespace Microsoft.AppCenter.Utils
             }
         }
 
-        static ApplicationLifecycleHelper()
+        static ApplicationLifecycleHelperDesktop()
         {
             // Retrieve the WPF APIs through reflection, if they are available
             if (WpfHelper.IsRunningOnWpf)
@@ -117,7 +116,7 @@ namespace Microsoft.AppCenter.Utils
 
         #endregion
 
-        public ApplicationLifecycleHelper()
+        public ApplicationLifecycleHelperDesktop()
         {
             Enabled = true;
             AppDomain.CurrentDomain.UnhandledException += (sender, eventArgs) =>
@@ -197,4 +196,3 @@ namespace Microsoft.AppCenter.Utils
         public event EventHandler<UnhandledExceptionOccurredEventArgs> UnhandledExceptionOccurred;
     }
 }
-#endif

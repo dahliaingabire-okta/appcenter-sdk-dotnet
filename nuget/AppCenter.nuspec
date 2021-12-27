@@ -51,6 +51,9 @@
       </group>
       <group targetFramework="Xamarin.iOS10">
       </group>
+      <group>
+        <dependency id="DesktopBridge.Helpers" version="1.2.2" />
+      </group>
     </dependencies>
     <frameworkAssemblies>
 
