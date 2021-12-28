@@ -56,10 +56,12 @@ namespace Microsoft.AppCenter
                     if (WpfHelper.IsRunningAsUwp)
                     {
                         _instance = ApplicationLifecycleHelperWinUI.Instance;
+                        AppCenterLog.Debug(AppCenterLog.LogTag, "Use lifecycle for WinUI applications.");
                     }
                     else
                     {
                         _instance = ApplicationLifecycleHelperDesktop.Instance;
+                        AppCenterLog.Debug(AppCenterLog.LogTag, "Use lifecycle for desktop applications.");
                     }
                 }
                 return _instance;
@@ -74,3 +76,4 @@ namespace Microsoft.AppCenter
         }
     }
 }
+

@@ -14,7 +14,7 @@ using Windows.ApplicationModel;
 using System.Windows.Forms;
 #endif
 
-#if NET461
+#if NET461 || NET472
 using System.Deployment.Application;
 #endif
 
@@ -182,7 +182,11 @@ namespace Microsoft.AppCenter.Utils
              * If the AssemblyInformationalVersion is not applied to an assembly,
              * the version number specified by the AssemblyFileVersion attribute is used instead.
              */
-            return DeploymentVersion ?? FileVersion ?? PackageVersion;
+            string productVersion = null;
+#if !WINDOWS10_0_17763_0
+            productVersion = Application.ProductVersion;
+#endif
+            return DeploymentVersion ?? productVersion ?? PackageVersion;
         }
 
         protected override string GetAppBuild()
@@ -208,8 +212,16 @@ namespace Microsoft.AppCenter.Utils
             get
             {
 #if WINDOWS10_0_17763_0
-                var packageVersion = Package.Current.Id.Version;
-                return $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}.{packageVersion.Revision}";
+                try
+                {
+                    var packageVersion = Package.Current.Id.Version;
+                    return $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}.{packageVersion.Revision}";
+                } 
+                catch (InvalidOperationException exception)
+                {
+                    AppCenterLog.Warn(AppCenterLog.LogTag, "Package version is available only in MSIX-packaged applications. See link https://docs.microsoft.com/en-us/windows/apps/desktop/modernize/desktop-to-uwp-supported-api.", exception);
+                    return "1.0.0.0";
+                }
 #endif
                 return null;
             }
@@ -219,7 +231,7 @@ namespace Microsoft.AppCenter.Utils
         {
             get
             {
-#if NET461
+#if NET461 || NET472
                 // Get ClickOnce version (does not exist on .NET Core). 
                 if (ApplicationDeployment.IsNetworkDeployed)
                 {
