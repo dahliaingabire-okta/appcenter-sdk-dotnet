@@ -182,20 +182,12 @@ namespace Microsoft.AppCenter.Utils
              * If the AssemblyInformationalVersion is not applied to an assembly,
              * the version number specified by the AssemblyFileVersion attribute is used instead.
              */
-#if WINDOWS10_0_17763_0
-            return $"1";
-#else
-            return DeploymentVersion ?? Application.ProductVersion;
-#endif
+            return DeploymentVersion ?? FileVersion ?? PackageVersion;
         }
 
         protected override string GetAppBuild()
         {
-#if WINDOWS10_0_17763_0
-            return $"1";
-#else
-            return DeploymentVersion ?? FileVersion;
-#endif
+            return DeploymentVersion ?? FileVersion ?? PackageVersion;
         }
 
         protected override string GetScreenSize()
@@ -208,6 +200,18 @@ namespace Microsoft.AppCenter.Utils
                 var height = GetDeviceCaps(desktop, DESKTOPVERTRES);
                 var width = GetDeviceCaps(desktop, DESKTOPHORZRES);
                 return $"{width}x{height}";
+            }
+        }
+
+        private static string PackageVersion
+        {
+            get
+            {
+#if WINDOWS10_0_17763_0
+                var packageVersion = Package.Current.Id.Version;
+                return $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}.{packageVersion.Revision}";
+#endif
+                return null;
             }
         }
 
@@ -226,11 +230,11 @@ namespace Microsoft.AppCenter.Utils
             }
         }
 
-#if !WINDOWS10_0_17763_0
         private static string FileVersion
         {
             get
             {
+#if !WINDOWS10_0_17763_0
                 // The AssemblyFileVersion uniquely identifies a build.
                 var entryAssembly = Assembly.GetEntryAssembly();
                 if (entryAssembly != null)
@@ -248,9 +252,10 @@ namespace Microsoft.AppCenter.Utils
 
                 // Fallback if entry assembly is not found (in unit tests for example).
                 return Application.ProductVersion;
+#endif
+                return null;
             }
         }
-#endif
 
         /// <summary>
         /// Import GetDeviceCaps function to retreive scale-independent screen size.

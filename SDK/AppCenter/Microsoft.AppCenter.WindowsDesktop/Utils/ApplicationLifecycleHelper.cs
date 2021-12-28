@@ -49,7 +49,8 @@ namespace Microsoft.AppCenter
 
         public static IApplicationLifecycleHelper Instance
         {
-            get {
+            get
+            {
                 if (_instance == null)
                 {
                     if (WpfHelper.IsRunningAsUwp)
@@ -70,7 +71,6 @@ namespace Microsoft.AppCenter
 
         private ApplicationLifecycleHelper()
         {
-
         }
     }
 }
