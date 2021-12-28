@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Management;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -27,6 +28,7 @@ namespace Microsoft.AppCenter.Utils
     public class DeviceInformationHelper : AbstractDeviceInformationHelper
     {
         private IManagmentClassFactory _managmentClassFactory;
+        private const string DefaultValue = "unknown";
 
         public DeviceInformationHelper()
         {
@@ -186,12 +188,12 @@ namespace Microsoft.AppCenter.Utils
 #if !WINDOWS10_0_17763_0
             productVersion = Application.ProductVersion;
 #endif
-            return DeploymentVersion ?? productVersion ?? PackageVersion;
+            return DeploymentVersion ?? productVersion ?? PackageVersion ?? DefaultValue;
         }
 
         protected override string GetAppBuild()
         {
-            return DeploymentVersion ?? FileVersion ?? PackageVersion;
+            return DeploymentVersion ?? FileVersion ?? PackageVersion ?? DefaultValue;
         }
 
         protected override string GetScreenSize()
@@ -220,10 +222,15 @@ namespace Microsoft.AppCenter.Utils
                 catch (InvalidOperationException exception)
                 {
                     AppCenterLog.Warn(AppCenterLog.LogTag, "Package version is available only in MSIX-packaged applications. See link https://docs.microsoft.com/en-us/windows/apps/desktop/modernize/desktop-to-uwp-supported-api.", exception);
-                    return "1.0.0.0";
                 }
-#endif
+                catch (IOException exception)
+                {
+                    AppCenterLog.Warn(AppCenterLog.LogTag, "Package version is available only in MSIX-packaged applications. See link https://docs.microsoft.com/en-us/windows/apps/desktop/modernize/desktop-to-uwp-supported-api.", exception); ;
+                }
                 return null;
+#else
+                return null;
+#endif
             }
         }
 
@@ -264,8 +271,9 @@ namespace Microsoft.AppCenter.Utils
 
                 // Fallback if entry assembly is not found (in unit tests for example).
                 return Application.ProductVersion;
-#endif
+#else
                 return null;
+#endif
             }
         }
 
