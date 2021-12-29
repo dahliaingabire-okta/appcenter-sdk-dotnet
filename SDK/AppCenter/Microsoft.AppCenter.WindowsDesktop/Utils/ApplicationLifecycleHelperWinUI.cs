@@ -14,32 +14,11 @@ using Windows.UI.Core;
 
 namespace Microsoft.AppCenter.Utils
 {
-    public class ApplicationLifecycleHelperWinUI: IApplicationLifecycleHelper
+    public class ApplicationLifecycleHelperWinUI: ApplicationLifecycleHelper
     {
-        public event EventHandler ApplicationSuspended;
-        public event EventHandler ApplicationResuming;
-        public event EventHandler<UnhandledExceptionOccurredEventArgs> UnhandledExceptionOccurred;
 
         // True if InvokeResuming has been called at least once during the current process
         private static bool _started;
-
-        // Considered to be suspended until can verify that has started
-        private static bool _suspended = true;
-
-        // Singleton instance of ApplicationLifecycleHelper
-        private static ApplicationLifecycleHelperWinUI _instance;
-        public static ApplicationLifecycleHelperWinUI Instance
-        {
-            get { return _instance ?? (_instance = new ApplicationLifecycleHelperWinUI()); }
-
-            // Setter for testing
-            internal set { _instance = value; }
-        }
-
-        /// <summary>
-        /// Indicates whether the application is currently in a suspended state. 
-        /// </summary>
-        public bool IsSuspended => _suspended;
 
         public ApplicationLifecycleHelperWinUI()
         {
@@ -141,20 +120,20 @@ namespace Microsoft.AppCenter.Utils
 
         internal void InvokeUnhandledExceptionOccurred(object sender, Exception exception)
         {
-            UnhandledExceptionOccurred?.Invoke(sender, new UnhandledExceptionOccurredEventArgs(exception));
+            base.InvokeUnhandledExceptionOccurred(sender, new UnhandledExceptionOccurredEventArgs(exception));
         }
 
         private void InvokeResuming(object sender, object e)
         {
             _started = true;
             _suspended = false;
-            ApplicationResuming?.Invoke(sender, EventArgs.Empty);
+            base.InvokeResuming(sender, EventArgs.Empty);
         }
 
         private void InvokeSuspended(object sender, object e)
         {
             _suspended = true;
-            ApplicationSuspended?.Invoke(sender, EventArgs.Empty);
+            base.InvokeSuspended(sender, EventArgs.Empty);
         }
     }
 }

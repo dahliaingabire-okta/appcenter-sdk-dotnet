@@ -6,46 +6,22 @@ using System;
 
 namespace Microsoft.AppCenter
 {
-    public class ApplicationLifecycleHelper : IApplicationLifecycleHelper
+    public abstract class ApplicationLifecycleHelper : IApplicationLifecycleHelper
     {
         private static IApplicationLifecycleHelper _instance = null;
-        public bool IsSuspended => _instance.IsSuspended;
 
-        public event EventHandler ApplicationSuspended
-        {
-            add
-            {
-                _instance.ApplicationSuspended += value;
-            }
-            remove
-            {
-                _instance.ApplicationSuspended -= value;
-            }
-        }
+        // Considered to be suspended until can verify that has started
+        protected static bool _suspended = true;
 
-        public event EventHandler ApplicationResuming
-        {
-            add
-            {
-                _instance.ApplicationResuming += value;
-            }
-            remove
-            {
-                _instance.ApplicationResuming -= value;
-            }
-        }
+        /// <summary>
+        /// Indicates whether the application is currently in a suspended state. 
+        /// </summary>
+        public bool IsSuspended => _suspended;
 
-        public event EventHandler<UnhandledExceptionOccurredEventArgs> UnhandledExceptionOccurred
-        {
-            add
-            {
-                _instance.UnhandledExceptionOccurred += value;
-            }
-            remove
-            {
-                _instance.UnhandledExceptionOccurred -= value;
-            }
-        }
+        public event EventHandler ApplicationSuspended;
+        public event EventHandler ApplicationResuming;
+        public event EventHandler ApplicationStarted;
+        public event EventHandler<UnhandledExceptionOccurredEventArgs> UnhandledExceptionOccurred;
 
         public static IApplicationLifecycleHelper Instance
         {
@@ -55,12 +31,12 @@ namespace Microsoft.AppCenter
                 {
                     if (WpfHelper.IsRunningAsUwp)
                     {
-                        _instance = ApplicationLifecycleHelperWinUI.Instance;
+                        _instance = new ApplicationLifecycleHelperWinUI();
                         AppCenterLog.Debug(AppCenterLog.LogTag, "Use lifecycle for WinUI applications.");
                     }
                     else
                     {
-                        _instance = ApplicationLifecycleHelperDesktop.Instance;
+                        _instance = new ApplicationLifecycleHelperDesktop();
                         AppCenterLog.Debug(AppCenterLog.LogTag, "Use lifecycle for desktop applications.");
                     }
                 }
@@ -71,8 +47,24 @@ namespace Microsoft.AppCenter
             internal set { _instance = value; }
         }
 
-        private ApplicationLifecycleHelper()
+        protected void InvokeResuming(object sender, EventArgs args)
         {
+            ApplicationResuming?.Invoke(sender, args);
+        }
+
+        protected void InvokeStarted(object sender, EventArgs args)
+        {
+            ApplicationStarted?.Invoke(sender, args);
+        }
+
+        protected void InvokeSuspended(object sender, EventArgs args)
+        {
+            ApplicationSuspended?.Invoke(sender, args);
+        }
+
+        protected void InvokeUnhandledExceptionOccurred(object sender, UnhandledExceptionOccurredEventArgs args)
+        {
+            UnhandledExceptionOccurred?.Invoke(sender, args);
         }
     }
 }

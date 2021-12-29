@@ -28,7 +28,7 @@ namespace Microsoft.AppCenter.Utils
     public class DeviceInformationHelper : AbstractDeviceInformationHelper
     {
         private IManagmentClassFactory _managmentClassFactory;
-        private const string DefaultValue = "unknown";
+        private const string _defaultVersion = "Unknown";
 
         public DeviceInformationHelper()
         {
@@ -188,12 +188,12 @@ namespace Microsoft.AppCenter.Utils
 #if !WINDOWS10_0_17763_0
             productVersion = Application.ProductVersion;
 #endif
-            return DeploymentVersion ?? productVersion ?? PackageVersion ?? DefaultValue;
+            return DeploymentVersion ?? productVersion ?? PackageVersion ?? _defaultVersion;
         }
 
         protected override string GetAppBuild()
         {
-            return DeploymentVersion ?? FileVersion ?? PackageVersion ?? DefaultValue;
+            return DeploymentVersion ?? FileVersion ?? PackageVersion ?? _defaultVersion;
         }
 
         protected override string GetScreenSize()
@@ -214,6 +214,10 @@ namespace Microsoft.AppCenter.Utils
             get
             {
 #if WINDOWS10_0_17763_0
+                if (!WpfHelper.IsRunningAsUwp)
+                {
+                    return null;
+                }
                 try
                 {
                     var packageVersion = Package.Current.Id.Version;
@@ -223,14 +227,8 @@ namespace Microsoft.AppCenter.Utils
                 {
                     AppCenterLog.Warn(AppCenterLog.LogTag, "Package version is available only in MSIX-packaged applications. See link https://docs.microsoft.com/en-us/windows/apps/desktop/modernize/desktop-to-uwp-supported-api.", exception);
                 }
-                catch (IOException exception)
-                {
-                    AppCenterLog.Warn(AppCenterLog.LogTag, "Package version is available only in MSIX-packaged applications. See link https://docs.microsoft.com/en-us/windows/apps/desktop/modernize/desktop-to-uwp-supported-api.", exception); ;
-                }
-                return null;
-#else
-                return null;
 #endif
+                return null;
             }
         }
 
@@ -271,9 +269,8 @@ namespace Microsoft.AppCenter.Utils
 
                 // Fallback if entry assembly is not found (in unit tests for example).
                 return Application.ProductVersion;
-#else
-                return null;
 #endif
+                return null;
             }
         }
 
