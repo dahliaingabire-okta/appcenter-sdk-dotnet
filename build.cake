@@ -135,7 +135,7 @@ Task("Externals-MacOS")
     var frameworksLocation = System.IO.Path.Combine(MacosExternals, "AppCenter-SDK-Apple/macOS");
 
     // Copy the AppCenter binaries directly from the frameworks and add the ".a" extension
-    var files = GetFiles($"{frameworksLocation}/*.framework/Versions/A/AppCenter*");
+    var files = GetFiles($"{frameworksLocation}/*.framework/AppCenter*");
     foreach (var file in files)
     {
         var filename = file.GetFilename();
@@ -143,12 +143,13 @@ Task("Externals-MacOS")
     }
 
     //generate correct .framework directories
-    CopyDirectory($"{frameworksLocation}/AppCenter.framework/Versions/A", $"{MacosExternals}/AppCenter.framework");
-    CopyDirectory($"{frameworksLocation}/AppCenterAnalytics.framework/Versions/A", $"{MacosExternals}/AppCenterAnalytics.framework");
-    CopyDirectory($"{frameworksLocation}/AppCenterCrashes.framework/Versions/A", $"{MacosExternals}/AppCenterCrashes.framework");
+    CopyDirectory($"{frameworksLocation}/AppCenter.framework", $"{MacosExternals}/AppCenter.framework");
+    CopyDirectory($"{frameworksLocation}/AppCenterAnalytics.framework", $"{MacosExternals}/AppCenterAnalytics.framework/");
+    CopyDirectory($"{frameworksLocation}/AppCenterCrashes.framework", $"{MacosExternals}/AppCenterCrashes.framework");
+
+    // Fix symlinks.
+    StartProcess("sh", new ProcessSettings{Arguments = $"scripts/xamarin-mac-fix-framework-symlinks.sh"});
 }).OnError(HandleError);
-
-
 
 // Create a common externals task depending on platform specific ones
 Task("Externals").IsDependentOn("Externals-Ios").IsDependentOn("Externals-MacOS").IsDependentOn("Externals-Android");
