@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<PropertyGroup>
+  <PropertyGroup>
+    <NoBindingEmbedding>true</NoBindingEmbedding>
+  </PropertyGroup>
+  <PropertyGroup>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<SignAssembly>true</SignAssembly>
 		<DelaySign>true</DelaySign>
@@ -57,54 +60,54 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="..\..\..\externals\ios\AppCenterDistribute.a">
-      <Kind>Static</Kind>
+    <NativeReference Include="..\..\..\externals\apple\AppCenterDistribute.xcframework">
+      <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
       <ForceLoad>True</ForceLoad>
       <WeakFrameworks>SafariServices AuthenticationServices</WeakFrameworks>
     </NativeReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\Info.plist">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\Info.plist">
       <Link>Resources\AppCenterDistributeResources.bundle\Info.plist</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\cs.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\cs.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\cs.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\de.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\de.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\de.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\en.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\en.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\en.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\es.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\es.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\es.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\fr.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\fr.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\fr.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\it.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\it.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\it.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\ja.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\ja.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\ja.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\ko.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\ko.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\ko.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\pl.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\pl.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\pl.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\ru.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\ru.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\ru.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\tr.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\tr.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\tr.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\zh-Hans.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\zh-Hans.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\zh-Hans.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
-    <BundleResource Include="..\..\..\externals\ios\AppCenterDistributeResources.bundle\zh-Hant.lproj\AppCenterDistribute.strings">
+    <BundleResource Include="..\..\..\externals\apple\AppCenterDistributeResources.bundle\zh-Hant.lproj\AppCenterDistribute.strings">
       <Link>Resources\AppCenterDistributeResources.bundle\zh-Hant.lproj\AppCenterDistribute.strings</Link>
     </BundleResource>
   </ItemGroup>

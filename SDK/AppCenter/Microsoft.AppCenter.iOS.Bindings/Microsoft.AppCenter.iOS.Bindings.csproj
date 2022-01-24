@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <NoBindingEmbedding>true</NoBindingEmbedding>
+  </PropertyGroup>
+  <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <SignAssembly>true</SignAssembly>
     <DelaySign>true</DelaySign>
@@ -29,12 +32,12 @@
       <CustomCommands>
         <Command>
           <type>BeforeBuild</type>
-          <command>sh build.sh -t=externals-ios</command>
+          <command>sh build.sh -t=externals-apple</command>
           <workingdir>${SolutionDir}</workingdir>
         </Command>
         <Command>
           <type>AfterClean</type>
-          <command>rm -rf externals/ios</command>
+          <command>rm -rf externals/apple</command>
           <workingdir>${SolutionDir}</workingdir>
         </Command>
       </CustomCommands>
@@ -77,8 +80,8 @@
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="..\..\..\externals\ios\AppCenter.a">
-      <Kind>Static</Kind>
+    <NativeReference Include="..\..\..\externals\apple\AppCenter.xcframework">
+      <Kind>Framework</Kind>
       <ForceLoad>True</ForceLoad>
       <LinkerFlags>-lsqlite3</LinkerFlags>
       <Frameworks>CoreTelephony Security SystemConfiguration</Frameworks>
