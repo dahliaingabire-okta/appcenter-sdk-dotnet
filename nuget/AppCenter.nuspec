@@ -79,20 +79,26 @@
     <file src="$android_dir$/Microsoft.AppCenter.xml" target="lib/MonoAndroid50" />
     <file src="$android_dir$/Microsoft.AppCenter.Android.Bindings.dll" target="lib/MonoAndroid50" />
 
+    <!-- Common folder for Apple platform with XCFramework artifacts. -->
+    <file src="$ios_dir$/Microsoft.AppCenter.iOS.Bindings.resources/**" target="content/res" />
+
     <!-- iOS -->
     <file src="$ios_dir$/Microsoft.AppCenter.dll" target="lib/Xamarin.iOS10" />
     <file src="$ios_dir$/Microsoft.AppCenter.xml" target="lib/Xamarin.iOS10" />
     <file src="$ios_dir$/Microsoft.AppCenter.iOS.Bindings.dll" target="lib/Xamarin.iOS10" />
+    <file src="$ios_dir$/Microsoft.AppCenter.iOS.targets" target="build/Xamarin.iOS10" />
 
     <!-- Mac Catalyst -->
     <file src="$maccatalyst_dir$/Microsoft.AppCenter.dll" target="lib/net6.0-maccatalyst15.0" />
     <file src="$maccatalyst_dir$/Microsoft.AppCenter.xml" target="lib/net6.0-maccatalyst15.0" />
     <file src="$maccatalyst_dir$/Microsoft.AppCenter.iOS.Bindings.dll" target="lib/net6.0-maccatalyst15.0" />
+    <file src="$maccatalyst_dir$/Microsoft.AppCenter.iOS.targets" target="build/net6.0-maccatalyst15.0" />
 
     <!-- macOS -->
     <file src="$macos_dir$/Microsoft.AppCenter.dll" target="lib/Xamarin.Mac" />
     <file src="$macos_dir$/Microsoft.AppCenter.xml" target="lib/Xamarin.Mac" />
     <file src="$macos_dir$/Microsoft.AppCenter.MacOS.Bindings.dll" target="lib/Xamarin.Mac" />
+    <file src="$macos_dir$/Microsoft.AppCenter.MacOS.targets" target="build/Xamarin.Mac" />
 
     <!-- UWP -->
     <file src="$uwp_dir$/Microsoft.AppCenter.dll" target="lib/uap10.0" />

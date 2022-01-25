@@ -76,6 +76,11 @@ Task("PrepareAssemblies")
         // could cause subdirectories that are created first to be deleted.
         CleanDirectory(assemblyGroup.Folder);
         CopyFiles(assemblyGroup.AssemblyPaths.Where(i => FileExists(i)), assemblyGroup.Folder, false);
+        foreach (var file in assemblyGroup.AssemblyPaths.Where(i => DirectoryExists(i)))
+        {
+            var targetPath = assemblyGroup.Folder + "/" + System.IO.Path.GetFileName(file);
+            CopyDirectory(file, targetPath);
+        }
     }
 }).OnError(HandleError);
 

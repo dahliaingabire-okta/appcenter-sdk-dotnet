@@ -83,6 +83,8 @@
     <NativeReference Include="..\..\..\externals\apple\AppCenter.xcframework">
       <Kind>Framework</Kind>
       <ForceLoad>True</ForceLoad>
+      <SmartLink>False</SmartLink>
+      <Frameworks></Frameworks>
       <LinkerFlags>-lsqlite3</LinkerFlags>
       <Frameworks>CoreTelephony Security SystemConfiguration</Frameworks>
     </NativeReference>

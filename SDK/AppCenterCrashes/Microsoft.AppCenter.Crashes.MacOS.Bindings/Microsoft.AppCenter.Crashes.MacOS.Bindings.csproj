@@ -61,7 +61,7 @@
     <NativeReference Include="..\..\..\externals\apple\AppCenterCrashes.xcframework">
       <Kind>Framework</Kind>
       <ForceLoad>True</ForceLoad>
-      <Frameworks />
+      <Frameworks></Frameworks>
       <LinkerFlags>-lc++</LinkerFlags>
       <IsCxx>True</IsCxx>
       <SmartLink>False</SmartLink>

@@ -55,6 +55,8 @@
     <NativeReference Include="..\..\..\externals\apple\AppCenterAnalytics.xcframework">
       <Kind>Framework</Kind>
       <ForceLoad>True</ForceLoad>
+      <SmartLink>False</SmartLink>
+      <Frameworks></Frameworks>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />

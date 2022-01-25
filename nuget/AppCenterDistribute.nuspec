@@ -30,10 +30,14 @@
     <file src="$android_dir$/Microsoft.AppCenter.Distribute.xml" target="lib/MonoAndroid50" />
     <file src="$android_dir$/Microsoft.AppCenter.Distribute.Android.Bindings.dll" target="lib/MonoAndroid50" />
 
+    <!-- Common folder for Apple platform with XCFramework artifacts. -->
+    <file src="$ios_dir$/Microsoft.AppCenter.Distribute.iOS.Bindings.resources/**" target="content/res" />
+    
     <!-- iOS -->
     <file src="$ios_dir$/Microsoft.AppCenter.Distribute.dll" target="lib/Xamarin.iOS10" />
     <file src="$ios_dir$/Microsoft.AppCenter.Distribute.xml" target="lib/Xamarin.iOS10" />
     <file src="$ios_dir$/Microsoft.AppCenter.Distribute.iOS.Bindings.dll" target="lib/Xamarin.iOS10" />
+    <file src="$ios_dir$/Microsoft.AppCenter.Distribute.iOS.targets" target="build/Xamarin.iOS10" />
 
   </files>
 </package>
