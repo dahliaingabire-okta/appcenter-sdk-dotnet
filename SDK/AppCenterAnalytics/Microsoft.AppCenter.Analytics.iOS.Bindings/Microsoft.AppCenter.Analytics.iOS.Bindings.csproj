@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <NoBindingEmbedding>true</NoBindingEmbedding>
+  </PropertyGroup>
+  <PropertyGroup>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<SignAssembly>true</SignAssembly>
 		<DelaySign>true</DelaySign>
@@ -49,9 +52,11 @@
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="..\..\..\externals\ios\AppCenterAnalytics.a">
-      <Kind>Static</Kind>
+    <NativeReference Include="..\..\..\externals\apple\AppCenterAnalytics.xcframework">
+      <Kind>Framework</Kind>
       <ForceLoad>True</ForceLoad>
+      <SmartLink>False</SmartLink>
+      <Frameworks></Frameworks>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />

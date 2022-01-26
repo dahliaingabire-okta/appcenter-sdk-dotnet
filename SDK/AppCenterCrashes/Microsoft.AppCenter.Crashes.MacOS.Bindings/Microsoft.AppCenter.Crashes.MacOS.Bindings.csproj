@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <NoBindingEmbedding>true</NoBindingEmbedding>
+  </PropertyGroup>
+  <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <SignAssembly>true</SignAssembly>
     <DelaySign>true</DelaySign>
@@ -55,10 +58,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="..\..\..\externals\macos\AppCenterCrashes.framework">
+    <NativeReference Include="..\..\..\externals\apple\AppCenterCrashes.xcframework">
       <Kind>Framework</Kind>
       <ForceLoad>True</ForceLoad>
-      <Frameworks />
+      <Frameworks></Frameworks>
       <LinkerFlags>-lc++</LinkerFlags>
       <IsCxx>True</IsCxx>
       <SmartLink>False</SmartLink>

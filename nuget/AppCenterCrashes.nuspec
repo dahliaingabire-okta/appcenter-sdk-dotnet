@@ -36,15 +36,20 @@
     <file src="$android_dir$/Microsoft.AppCenter.Crashes.xml" target="lib/MonoAndroid50" />
     <file src="$android_dir$/Microsoft.AppCenter.Crashes.Android.Bindings.dll" target="lib/MonoAndroid50" />
 
+    <!-- Common folder for Apple platform with XCFramework artifacts. -->
+    <file src="$ios_dir$/Microsoft.AppCenter.Crashes.iOS.Bindings.resources/**" target="content/res" />
+    
     <!-- iOS -->
     <file src="$ios_dir$/Microsoft.AppCenter.Crashes.dll" target="lib/Xamarin.iOS10" />
     <file src="$ios_dir$/Microsoft.AppCenter.Crashes.xml" target="lib/Xamarin.iOS10" />
     <file src="$ios_dir$/Microsoft.AppCenter.Crashes.iOS.Bindings.dll" target="lib/Xamarin.iOS10" />
+    <file src="$ios_dir$/Microsoft.AppCenter.Crashes.iOS.targets" target="build/Xamarin.iOS10" />
 
     <!-- macOS -->
     <file src="$macos_dir$/Microsoft.AppCenter.Crashes.dll" target="lib/Xamarin.Mac" />
     <file src="$macos_dir$/Microsoft.AppCenter.Crashes.xml" target="lib/Xamarin.Mac" />
     <file src="$macos_dir$/Microsoft.AppCenter.Crashes.MacOS.Bindings.dll" target="lib/Xamarin.Mac" />
+    <file src="$macos_dir$/Microsoft.AppCenter.Crashes.MacOS.targets" target="build/Xamarin.Mac" />
 
     <!-- UWP -->
     <file src="$uwp_dir$/Microsoft.AppCenter.Crashes.dll" target="lib/uap10.0" />
