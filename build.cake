@@ -116,6 +116,26 @@ Task("Externals-Apple")
     // Move binaries to externals/apple so that linked files don't have versions
     // in their paths
     CopyDirectory(frameworksLocation, AppleExternals);
+
+    // Fix binary symlink for Xamarin Mac.
+    var macFolder = "macos-arm64_x86_64";
+    var macCatalystFolder = "ios-arm64_x86_64-maccatalyst";
+
+    // Remove symlinks.
+    DeleteFiles($"{AppleExternals}/AppCenter.xcframework/{macFolder}/AppCenter.framework/AppCenter");
+    DeleteFiles($"{AppleExternals}/AppCenterAnalytics.xcframework/{macFolder}/AppCenterAnalytics.framework/AppCenterAnalytics");
+    DeleteFiles($"{AppleExternals}/AppCenterCrashes.xcframework/{macFolder}/AppCenterCrashes");
+    DeleteFiles($"{AppleExternals}/AppCenter.xcframework/{macCatalystFolder}/AppCenter.framework/AppCenter");
+    DeleteFiles($"{AppleExternals}/AppCenterAnalytics.xcframework/{macCatalystFolder}/AppCenterAnalytics.framework/AppCenterAnalytics");
+    DeleteFiles($"{AppleExternals}/AppCenterCrashes.xcframework/{macCatalystFolder}/AppCenterCrashes");
+
+    // Copy original binaries.
+    CopyFile($"{frameworksLocation}/AppCenter.xcframework/{macFolder}/AppCenter.framework/Versions/A/AppCenter", $"{AppleExternals}/AppCenter.xcframework/{macFolder}/AppCenter.framework/AppCenter");
+    CopyFile($"{frameworksLocation}/AppCenterAnalytics.xcframework/{macFolder}/AppCenterAnalytics.framework/Versions/A/AppCenterAnalytics", $"{AppleExternals}/AppCenterAnalytics.xcframework/{macFolder}/AppCenterAnalytics.framework/AppCenterAnalytics");
+    CopyFile($"{frameworksLocation}/AppCenterCrashes.xcframework/{macFolder}/AppCenterCrashes.framework/Versions/A/AppCenterCrashes", $"{AppleExternals}/AppCenterCrashes.xcframework/{macFolder}/AppCenterCrashes.framework/AppCenterCrashes");
+    CopyFile($"{frameworksLocation}/AppCenter.xcframework/{macCatalystFolder}/AppCenter.framework/Versions/A/AppCenter", $"{AppleExternals}/AppCenter.xcframework/{macCatalystFolder}/AppCenter.framework/AppCenter");
+    CopyFile($"{frameworksLocation}/AppCenterAnalytics.xcframework/{macCatalystFolder}/AppCenterAnalytics.framework/Versions/A/AppCenterAnalytics", $"{AppleExternals}/AppCenterAnalytics.xcframework/{macCatalystFolder}/AppCenterAnalytics.framework/AppCenterAnalytics");
+    CopyFile($"{frameworksLocation}/AppCenterCrashes.xcframework/{macCatalystFolder}/AppCenterCrashes.framework/Versions/A/AppCenterCrashes", $"{AppleExternals}/AppCenterCrashes.xcframework/{macCatalystFolder}/AppCenterCrashes.framework/AppCenterCrashes");
     
 }).OnError(HandleError);
 

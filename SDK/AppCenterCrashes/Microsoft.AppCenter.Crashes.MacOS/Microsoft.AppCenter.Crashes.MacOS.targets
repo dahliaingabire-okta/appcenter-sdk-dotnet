@@ -11,4 +11,8 @@
             </NativeReference>
         </ItemGroup>
     </Target>
+    <Target Name="FixAppCenterCrashesXamarinMacSymlink" AfterTargets="_CollectFrameworks">
+        <Message Text="Fix symlink of AppCenterCrashes binary for Xamarin Mac." />
+        <Exec Command="cd $(TargetDir)/res/AppCenterCrashes.xcframework/macos-arm64_x86_64/AppCenterCrashes.framework ; rm AppCenterCrashes ; cp -r Versions/A/AppCenterCrashes AppCenterCrashes" />
+    </Target>
 </Project>
