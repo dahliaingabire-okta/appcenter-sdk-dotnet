@@ -1,16 +1,4 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Target Name="BeforeCompile">
-        <ItemGroup>
-            <BindingResources Include="$(MSBuildThisFileDirectory)../content/res/**/*.*" />
-        </ItemGroup>
-        <Copy SourceFiles="@(BindingResources)" DestinationFolder="$(TargetDir)/res/%(RecursiveDir)" ContinueOnError="false" />
-        <ItemGroup>
-            <NativeReference Include="$(TargetDir)/res/AppCenterAnalytics.xcframework">
-                <Kind>Framework</Kind>
-                <SmartLink>False</SmartLink>
-            </NativeReference>
-        </ItemGroup>
-    </Target>
     <Target Name="FixAppCenterAnalyticsXamarinMacSymlink" AfterTargets="_CollectFrameworks">
         <Message Text="Fix symlink of AppCenterAnalytics binary for Xamarin Mac." />
         <Exec Command="cd $(TargetDir)/res/AppCenterAnalytics.xcframework/macos-arm64_x86_64/AppCenterAnalytics.framework ; rm AppCenterAnalytics ; cp -r Versions/A/AppCenterAnalitycs AppCenterAnalytics" />

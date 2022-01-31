@@ -19,7 +19,6 @@
         <assembly path="SDK/AppCenterCrashes/Microsoft.AppCenter.Crashes.iOS/bin/Release/Microsoft.AppCenter.Crashes.iOS.Bindings.dll"/>
         <assembly path="SDK/AppCenterCrashes/Microsoft.AppCenter.Crashes.iOS.Bindings/bin/Release/Microsoft.AppCenter.Crashes.iOS.Bindings.resources"/>
         <assembly path="SDK/AppCenterDistribute/Microsoft.AppCenter.Distribute.iOS/bin/Release/Microsoft.AppCenter.Distribute.dll"/>
-        <assembly path="SDK/AppCenterDistribute/Microsoft.AppCenter.Distribute.iOS/Microsoft.AppCenter.Distribute.iOS.targets"/>
         <assembly path="SDK/AppCenterDistribute/Microsoft.AppCenter.Distribute.iOS/bin/Release/Microsoft.AppCenter.Distribute.iOS.Bindings.dll"/>
         <assembly path="SDK/AppCenterDistribute/Microsoft.AppCenter.Distribute.iOS.Bindings/bin/Release/Microsoft.AppCenter.Distribute.iOS.Bindings.resources"/>
     </group>
