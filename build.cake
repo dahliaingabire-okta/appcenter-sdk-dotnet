@@ -79,7 +79,7 @@ Task("PrepareAssemblies")
         foreach (var file in assemblyGroup.AssemblyPaths.Where(i => DirectoryExists(i)))
         {
             var targetPath = assemblyGroup.Folder + "/" + System.IO.Path.GetFileName(file);
-            CopyDirectory(file, targetPath);
+            StartProcess("sh", new ProcessSettings{Arguments = $"copy_command.sh {file} {targetPath}"});
         }
     }
 }).OnError(HandleError);
@@ -105,19 +105,18 @@ Task("Externals-Android")
 Task("Externals-Apple")
     .Does(() =>
 {
-    CleanDirectory(AppleExternals);
+    //CleanDirectory(AppleExternals);
     var zipFile = System.IO.Path.Combine(AppleExternals, "ios.zip");
 
     // Download zip file containing AppCenter frameworks
-    DownloadFile(AppleUrl, zipFile);
+    //DownloadFile(AppleUrl, zipFile);
 
     // Use bash unzipper to avoid issues with are broken symlinks.
-    StartProcess("unzip", new ProcessSettings{Arguments = $"{zipFile} -d {AppleExternals}"});
     var frameworksLocation = System.IO.Path.Combine(AppleExternals, "AppCenter-SDK-Apple");
 
     // Move binaries to externals/apple so that linked files don't have versions
     // in their paths
-    CopyDirectory(frameworksLocation, AppleExternals);
+    StartProcess("sh", new ProcessSettings{Arguments = $"unzip_and_copy.sh {zipFile} {AppleExternals} {frameworksLocation}"});
 
 }).OnError(HandleError);
 
@@ -148,7 +147,7 @@ Task("NuGet")
         }
 
         // Prepare nuspec by making substitutions in a copied nuspec (to avoid altering the original)
-        CopyFile(nuspecPath, specCopyName);
+        StartProcess("sh", new ProcessSettings{Arguments = $"copy_command.sh {nuspecPath} {specCopyName}"});
         ReplaceAssemblyPathsInNuspecs(specCopyName);
         Information("Building a NuGet package for " + module.DotNetModule + " version " + module.NuGetVersion);
         NuGetPack(File(specCopyName), new NuGetPackSettings {

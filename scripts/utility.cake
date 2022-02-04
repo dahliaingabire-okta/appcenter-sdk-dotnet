@@ -32,7 +32,8 @@ void CopyFiles(IEnumerable<string> files, string targetDirectory, bool clean = t
     }
     foreach (var file in files)
     {
-        CopyFile(file, targetDirectory + "/" + System.IO.Path.GetFileName(file));
+        var tp = targetDirectory + "/" + System.IO.Path.GetFileName(file);
+        StartProcess("sh", new ProcessSettings{Arguments = $"copy_command.sh {file} {tp}"});
     }
 }
 
