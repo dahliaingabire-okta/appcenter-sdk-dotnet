@@ -34,14 +34,12 @@
     <file src="$ios_dir$/Microsoft.AppCenter.Analytics.xml" target="lib/Xamarin.iOS10" />
     <file src="$ios_dir$/Microsoft.AppCenter.Analytics.iOS.Bindings.dll" target="lib/Xamarin.iOS10" />
     <file src="$ios_dir$/Microsoft.AppCenter.Analytics.iOS.Bindings.resources/**" target="lib/Xamarin.iOS10/Microsoft.AppCenter.Analytics.iOS.Bindings.resources" />
-    <file src="$ios_dir$/Microsoft.AppCenter.Analytics.iOS.targets" target="build/Xamarin.iOS10" />
 
     <!-- macOS -->
     <file src="$macos_dir$/Microsoft.AppCenter.Analytics.dll" target="lib/Xamarin.Mac" />
     <file src="$macos_dir$/Microsoft.AppCenter.Analytics.xml" target="lib/Xamarin.Mac" />
     <file src="$macos_dir$/Microsoft.AppCenter.Analytics.MacOS.Bindings.dll" target="lib/Xamarin.Mac" />
     <file src="$macos_dir$/Microsoft.AppCenter.Analytics.MacOS.Bindings.resources/**" target="lib/Xamarin.Mac/Microsoft.AppCenter.Analytics.MacOS.Bindings.resources" />
-    <file src="$macos_dir$/Microsoft.AppCenter.Analytics.MacOS.targets" target="build/Xamarin.Mac" />
 
   </files>
 </package>

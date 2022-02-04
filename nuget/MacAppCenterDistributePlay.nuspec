@@ -37,7 +37,6 @@
     <file src="$ios_dir$/Microsoft.AppCenter.xml" target="lib/Xamarin.iOS10" />
     <file src="$ios_dir$/Microsoft.AppCenter.iOS.Bindings.dll" target="lib/Xamarin.iOS10" />
     <file src="$ios_dir$/Microsoft.AppCenter.iOS.Bindings.resources/**" target="lib/Xamarin.iOS10/Microsoft.AppCenter.iOS.Bindings.resources" />
-    <file src="$ios_dir$/Microsoft.AppCenter.iOS.targets" target="build/Xamarin.iOS10" />
     
   </files>
 </package>
